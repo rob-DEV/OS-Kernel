@@ -1,10 +1,15 @@
-#include "video.h"
+#include "include/terminal.h"
+
 
 extern "C"
 void kmain(void)
 {
-    Video video;
-    video.clear();
-    video.write("Hello World! from C++");
+    Terminal terminal;
+    terminal.cls();
+    terminal.linebreak();
+    terminal.println("Welcome to OS Kernel ver 1.0");
+    terminal.linebreak();
+
+
     for(;;);
 }
