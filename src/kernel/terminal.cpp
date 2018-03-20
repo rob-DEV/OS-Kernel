@@ -6,11 +6,25 @@
 #include "include/memory.h"
 #include "include/string.h"
 
-const uint16_t WIDTH = 80;
-const uint16_t HEIGHT = 25;
-#define WHITE_BLACK 0x07;
+uint8_t Terminal::vga_entry(enum vga_color fg, enum vga_color bg)
+{
+    return fg | bg << 4;
+}
 
-void Terminal::putch(char c) {
+void Terminal::init() {
+    cursor_x = 0;
+    cursor_y = 0;
+    color = vga_entry(VGA_COLOR_BLUE, VGA_COLOR_CYAN);
+
+    unsigned char* _video_memory = video_memory;
+    for (int i = 0; i < VGA_WIDTH * VGA_HEIGHT; i++) {
+        *_video_memory = ' ';
+        *(_video_memory+1) = color;
+        _video_memory += 2;
+    }
+}
+
+void Terminal::putchar(char c) {
     if (c == '\n' || c == '\r')
     {
         cursor_x = 0;
@@ -18,25 +32,25 @@ void Terminal::putch(char c) {
     }
     else
     {
-        unsigned int position = cursor_y * WIDTH + cursor_x;
+        unsigned int position = cursor_y * VGA_WIDTH + cursor_x;
         unsigned char* memory = video_memory + position*2;
         *memory = c;
-        *(memory+1) = WHITE_BLACK;
+        *(memory+1) = color;
         cursor_x++;
-        if (cursor_x == WIDTH)
+        if (cursor_x == VGA_WIDTH)
         {
             cursor_x = 0;
             cursor_y++;
         }
     }
 
-    if (cursor_y == HEIGHT) {
-        memmove(video_memory, video_memory + (WIDTH * 2), (WIDTH * (HEIGHT - 1)) * 2);
-        memset(video_memory + ((WIDTH * (HEIGHT - 1)) * 2), 0, WIDTH * 2);
+    if (cursor_y == VGA_HEIGHT) {
+        memmove(video_memory, video_memory + (VGA_WIDTH * 2), (VGA_WIDTH * (VGA_HEIGHT - 1)) * 2);
+        memset(video_memory + ((VGA_WIDTH * (VGA_HEIGHT - 1)) * 2), 0, VGA_WIDTH * 2);
         cursor_y--;
     }
 }
-void Terminal::setpos(int x, int y) {
+void Terminal::set_pos(int x, int y) {
     cursor_x = x;
     cursor_y = y;
 }
@@ -46,28 +60,27 @@ void Terminal::print(const char *str) {
     int i;
     for(i = 0; i < len; i++)
     {
-        putch(str[i]);
+        putchar(str[i]);
     }
 }
 
 void Terminal::println(const char *str) {
     print(str);
-    putch('\n');
+    putchar('\n');
 }
 
-void Terminal::linebreak()
-{
+void Terminal::linebreak() {
     for(uint8_t i = 0; i < 80; i++) {
         print("-");
     }
 }
 
 void Terminal::cls(void) {
-    unsigned char* memory = video_memory;
-    for (int i = 0; i < WIDTH * HEIGHT; i++) {
-        *memory = ' ';
-        *(memory+1) = WHITE_BLACK;
-        memory += 2;
+    unsigned char* _video_memory = video_memory;
+    for (int i = 0; i < VGA_WIDTH * VGA_HEIGHT; i++) {
+        *_video_memory = ' ';
+        *(_video_memory+1) = color;
+        _video_memory += 2;
     }
     cursor_x = 0;
     cursor_y = 0;
