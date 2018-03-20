@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 make
-qemu -kernel latest.bin
+make run
+make clean

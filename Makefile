@@ -4,9 +4,9 @@ LNFLAGS = -T linker.ld -melf_i386
 CCFLAGS = -c -ffreestanding -nostdlib -fno-builtin -fno-rtti -fno-exceptions
 ASFLAGS = -c
 CTMP = $(wildcard src/kernel/*.cpp)
-ATMP = $(wildcard src/boot/*.s)
+ATMP = $(wildcard src/kernel/arch/i386/*.s)
 CFILE = $(subst src/kernel/, ,$(CTMP))
-AFILE = $(subst src/boot/, ,$(ATMP))
+AFILE = $(subst src/kernel/arch/i386/, ,$(ATMP))
 CSRC = $(CFILE:.c=)
 ASRC = $(AFILE:.s=)
 
@@ -21,7 +21,7 @@ ccompile:
 
 acompile:
 	for file in $(ASRC) ; do \
-		$(AS) $(ASFLAGS) src/boot/$$file.s -o out/$$file.o ; \
+		$(AS) $(ASFLAGS) src/kernel/arch/i386/$$file.s -o out/$$file.o ; \
 	done
 
 link:

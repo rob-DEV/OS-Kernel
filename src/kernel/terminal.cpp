@@ -2,9 +2,9 @@
 // Created by dev on 19/03/18.
 //
 
-#include "../../include/terminal.h"
-#include "../../include/memory.h"
-#include "../../include/string.h"
+#include "include/terminal.h"
+#include "include/memory.h"
+#include "include/string.h"
 
 uint8_t Terminal::vga_entry(enum vga_color fg, enum vga_color bg)
 {
@@ -44,6 +44,11 @@ void Terminal::putchar(char c) {
         }
     }
 
+    if (cursor_y == VGA_HEIGHT) {
+        memmove(video_memory, video_memory + (VGA_WIDTH * 2), (VGA_WIDTH * (VGA_HEIGHT - 1)) * 2);
+        memset(video_memory + ((VGA_WIDTH * (VGA_HEIGHT - 1)) * 2), 0, VGA_WIDTH * 2);
+        cursor_y--;
+    }
 }
 void Terminal::set_pos(int x, int y) {
     cursor_x = x;
