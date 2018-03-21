@@ -7,7 +7,7 @@ LN_FLAGS = -T linker.ld -melf_i386
 
 
 CXX_FILE = $(wildcard src/kernel/*.cpp) \
-           $(wildcard src/kernel/include/*.cpp)
+           $(wildcard src/kernel//arch/i386/*.cpp)
 
 CXX_SRC = $(CXX_FILE:.c=)
 

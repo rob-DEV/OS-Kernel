@@ -6,9 +6,6 @@
 #define OS_TERMINAL_H
 
 #include "types.h"
-const uint16_t VGA_WIDTH = 80;
-const uint16_t VGA_HEIGHT = 25;
-
 
 enum vga_color{
     VGA_COLOR_BLACK = 0,
@@ -29,32 +26,11 @@ enum vga_color{
     VGA_COLOR_WHITE = 15,
 };
 
-#define WHITE_BLACK 0x07;
-
-class Terminal {
-private:
-    unsigned char* video_memory = (unsigned char*)0xb8000;
-    uint8_t cursor_x, cursor_y;
-    uint8_t color;
-
-    uint8_t vga_entry(enum vga_color fg, enum vga_color bg);
-    void putchar(char c);
-    void putint(int i);
-    void init();
-
-
-
-
-public:
-    Terminal() { init(); }
-    void set_pos(int x, int y);
-
-    void set_color();
-    void print(const char* str);
-    void println(const char* str);
-    void linebreak();
-    void cls();
-};
-
-
+uint8_t vga_entry_color(enum vga_color fg, enum vga_color bg);
+void terminal_initialize(void);
+void terminal_putchar(char c);
+void terminal_write(const char *str);
+void terminal_writeline(const char *str);
+void terminal_clearscreen(void);
+void terminal_linkbreak(void);
 #endif //OS_TERMINAL_H
