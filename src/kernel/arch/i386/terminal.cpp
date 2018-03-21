@@ -2,9 +2,9 @@
 // Created by dev on 19/03/18.
 //
 
-#include "arch/i386/include/terminal.h"
-#include "arch/i386/include/memory.h"
-#include "arch/i386/include/string.h"
+#include "include/terminal.h"
+#include "include/mem_util.h"
+#include "include/string.h"
 
 uint8_t Terminal::vga_entry(enum vga_color fg, enum vga_color bg)
 {

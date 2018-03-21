@@ -2,7 +2,7 @@
 // Created by dev on 19/03/18.
 //
 
-#include "../arch/i386/include/memory.h"
+#include "include/mem_util.h"
 
 void memcpy(void* src, void* dst , size_t size){
     uint8_t* bsrc = (uint8_t*)src;
@@ -39,4 +39,13 @@ void *memmove(void *dst_void, const void *src_void, size_t length) {
     }
 
     return dst_void;
+}
+
+uint16_t strlen(const char* c){
+    char i;
+    uint16_t length = 0;
+    while((i = c[length]) != 0){
+        length++;
+    }
+    return length;
 }
