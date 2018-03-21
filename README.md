@@ -1,4 +1,4 @@
-A simple OS Kernel written in C++ with an assemble bootloader.
+A simple OS Kernel written in C++ with an assembly bootloader.
 
 What does it does:
 
