@@ -1,29 +1,39 @@
 CXX = ~/opt/cross/bin/i386-elf-g++
 CXX_FLAGS = -c -ffreestanding -nostdlib -fno-builtin -fno-rtti -fno-exceptions
-AS = ~/opt/cross/bin/i386-elf-as
-LNFLAGS = -T linker.ld -melf_i386
-
-ASFLAGS = -c
-
-
-CFILE = $(wildcard src/kernel/*.cpp) \
-        $(wildcard src/kernel/include/*.cpp)
-CSRC = $(CFILE:.c=)
+ASM = ~/opt/cross/bin/i386-elf-as
+ASM_FLAGS = -c
+LN_FLAGS = -T linker.ld -melf_i386
 
 
-all: ccompile
 
-ccompile:
-	for file in $(CSRC) ; do \
-		$(CXX) $(CXX_FLAGS) $$file -o $$file.o ; \
+CXX_FILE = $(wildcard src/kernel/*.cpp) \
+           $(wildcard src/kernel/include/*.cpp)
+
+CXX_SRC = $(CXX_FILE:.c=)
+
+ASM_FILE = $(wildcard src/kernel/arch/i386/*.s)
+ASM_SOURCE = $(ASM_FILE:.s=)
+
+OUT_TEMP = $(wildcard a_out/*.o)
+OUT = $(wildcard out/*.o)
+
+all: cxxcompile acompile
+
+cxxcompile:
+
+	for file in $(CXX_SRC) ; do \
+		$(CXX) $(CXX_FLAGS) $$file -o a_out/$$file.o ; \
 	done
 
+acompile:
+	for file in $(ASM_SOURCE) ; do \
+	    $(ASM) $(ASM_FLAGS) $$file.s -o a_out/$$file.o ; \
+	done
+link:
+		ld $(LN_FLAGS) -o latest.bin $(OUT)
 
 run:
 	qemu-system-i386 -kernel latest.bin
-
-bochs:
-	bochs -q -f bochsrc.txt
 
 clean:
 	rm -f $(OUT)

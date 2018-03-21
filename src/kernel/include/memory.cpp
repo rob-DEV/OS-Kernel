@@ -2,7 +2,7 @@
 // Created by dev on 19/03/18.
 //
 
-#include "include/memory.h"
+#include "../arch/i386/include/memory.h"
 
 void memcpy(void* src, void* dst , size_t size){
     uint8_t* bsrc = (uint8_t*)src;

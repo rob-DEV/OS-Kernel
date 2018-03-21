@@ -2,7 +2,7 @@
 // Created by dev on 20/03/18.
 //
 
-#include "include/string.h"
+#include "arch/i386/include/string.h"
 
 uint16_t strlen(const char* c){
     char i;
