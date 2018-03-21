@@ -1,31 +1,23 @@
-CC = ~/opt/cross/bin/i386-elf-g++
+CXX = ~/opt/cross/bin/i386-elf-g++
+CXX_FLAGS = -c -ffreestanding -nostdlib -fno-builtin -fno-rtti -fno-exceptions
 AS = ~/opt/cross/bin/i386-elf-as
 LNFLAGS = -T linker.ld -melf_i386
-CCFLAGS = -c -ffreestanding -nostdlib -fno-builtin -fno-rtti -fno-exceptions
+
 ASFLAGS = -c
-CTMP = $(wildcard src/kernel/*.cpp)
-ATMP = $(wildcard src/kernel/arch/i386/*.s)
-CFILE = $(subst src/kernel/, ,$(CTMP))
-AFILE = $(subst src/kernel/arch/i386/, ,$(ATMP))
+
+
+CFILE = $(wildcard src/kernel/*.cpp) \
+        $(wildcard src/kernel/include/*.cpp)
 CSRC = $(CFILE:.c=)
-ASRC = $(AFILE:.s=)
 
-OUT = $(wildcard out/*.o)
 
-all: ccompile acompile link
+all: ccompile
 
 ccompile:
 	for file in $(CSRC) ; do \
-		$(CC) $(CCFLAGS) src/kernel/$$file -o out/$$file.o ; \
+		$(CXX) $(CXX_FLAGS) $$file -o $$file.o ; \
 	done
 
-acompile:
-	for file in $(ASRC) ; do \
-		$(AS) $(ASFLAGS) src/kernel/arch/i386/$$file.s -o out/$$file.o ; \
-	done
-
-link:
-		ld $(LNFLAGS) -o latest.bin $(OUT)
 
 run:
 	qemu-system-i386 -kernel latest.bin
@@ -42,3 +34,5 @@ buildiso:
 	cp latest.bin isodir/boot/kernel.elf
 	cp grub.cfg isodir/boot/grub/grub.cfg
 	sudo grub-mkrescue -o bootable.iso isodir
+
+
