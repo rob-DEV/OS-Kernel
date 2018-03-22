@@ -1,16 +1,21 @@
 #include "arch/i386/include/terminal.h"
+#include "arch/i386/include/gdt.h"
 
 extern "C"
-
 void kernel_main(void)
 {
     //First off
-    terminal_initialize();
+    init_terminal();
 
     linebreak();
-    terminal_write("------------------------- Welcome to Kernel OS ver 1.0 -------------------------");
+    puts("------------------------- Welcome to Kernel OS ver 1.0 -------------------------");
     linebreak();
+    gdt_install();
+
+    set_video_color(VGA_COLOR_WHITE, VGA_COLOR_BLACK);
+    puts("------------------------- Welcome to Kernel OS ver 1.0 -------------------------");
 
     for(;;);
+
 
 }
