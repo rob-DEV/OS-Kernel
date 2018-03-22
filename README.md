@@ -1,4 +1,6 @@
-A simple OS Kernel written in C++ with an assemble bootloader.
+A simple OS Kernel written in C++ with an assembly bootloader.
+
+![1](https://github.com/rob-DEV/os-kernel/blob/master/res/1.PNG)
 
 What does it does:
 
