@@ -32,5 +32,6 @@ void terminal_putchar(char c);
 void terminal_write(const char *str);
 void terminal_writeline(const char *str);
 void terminal_clearscreen(void);
-void terminal_linkbreak(void);
+void linebreak(void);
+
 #endif //OS_TERMINAL_H

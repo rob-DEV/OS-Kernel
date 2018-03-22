@@ -30,15 +30,17 @@ uint16_t vga_entry(unsigned char uc, uint8_t color) {
 void terminal_initialize(void) {
     terminal_row = 0;
     terminal_column = 0;
-    terminal_color = vga_entry_color(VGA_COLOR_WHITE, VGA_COLOR_CYAN);
+    terminal_color = vga_entry_color(VGA_COLOR_WHITE, VGA_COLOR_BLACK);
 
-    terminal_buffer = VGA_MEMORY;
-    for (size_t y = 0; y < VGA_HEIGHT; y++) {
-        for (size_t x = 0; x < VGA_WIDTH; x++) {
-            const size_t index = y * VGA_WIDTH + x;
-            terminal_buffer[index] = vga_entry(' ', terminal_color);
-        }
+    unsigned char* _video_memory = VGA_MEMORY;
+    for (int i = 0; i < VGA_WIDTH * VGA_HEIGHT; i++) {
+        *_video_memory = ' ';
+        *(_video_memory+1) = terminal_color;
+        _video_memory += 2;
     }
+    terminal_row = 0;
+    terminal_column = 0;
+
 
 }
 
@@ -78,9 +80,11 @@ void print(const char *str) {
         terminal_putchar(str[i]);
     }
 }
+
 void terminal_write(const char *str) {
     print(str);
 }
+
 void terminal_writeline(const char *str) {
     print(str);
     terminal_putchar('\n');
@@ -97,7 +101,7 @@ void terminal_clearscreen(void) {
     terminal_column = 0;
 }
 
-void terminal_linkbreak(void) {
+void linebreak(void) {
     for(uint8_t i = 0; i < 80; i++) {
         print("-");
     }

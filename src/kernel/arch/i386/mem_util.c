@@ -40,12 +40,3 @@ void *memmove(void *dst_void, const void *src_void, size_t length) {
 
     return dst_void;
 }
-
-uint16_t strlen(const char* c){
-    char i;
-    uint16_t length = 0;
-    while((i = c[length]) != 0){
-        length++;
-    }
-    return length;
-}
