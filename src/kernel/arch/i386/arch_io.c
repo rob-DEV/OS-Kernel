@@ -1,4 +1,5 @@
-//
+///* This exists in 'start.asm', and is used to load our IDT */
+extern void idt_load();
 // Created by dev on 22/03/18.
 //
 

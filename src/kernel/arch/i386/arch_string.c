@@ -7,7 +7,8 @@ uint16_t strlen(const char* c){
     char i;
     uint16_t length = 0;
     while((i = c[length]) != 0){
-        length++;
+        length++;/* This exists in 'start.asm', and is used to load our IDT */
+extern void idt_load();
     }
     return length;
 }

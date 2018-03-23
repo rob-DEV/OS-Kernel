@@ -2,26 +2,6 @@
 // Created by dev on 22/03/18.
 //
 #include "include/arch_gdt.h"
-#include "include/arch_terminal.h"
-
-/* Defines a GDT entry. We say packed, because it prevents the
-*  compiler from doing things that it thinks is best: Prevent
-*  compiler "optimization" by packing */
-struct gdt_entry {
-    unsigned short limit_low;
-    unsigned short base_low;
-    unsigned char base_middle;
-    unsigned char access;
-    unsigned char granularity;
-    unsigned char base_high;
-} __attribute__((packed));
-
-/* Special pointer which includes the limit: The max bytes
-*  taken up by the GDT, minus 1. Again, this NEEDS to be packed */
-struct gdt_ptr {
-    unsigned short limit;
-    unsigned int base;
-} __attribute__((packed));
 
 /* Our GDT, with 3 entries, and finally our special GDT pointer */
 struct gdt_entry gdt[3];
@@ -43,7 +23,6 @@ void gdt_set_gate(int num, unsigned long base, unsigned long limit, unsigned cha
 }
 
 void gdt_install() {
-    puts("Installing Global Descriptor Table!\n");
     /* Setup the GDT pointer and limit */
     gp.limit = (sizeof(struct gdt_entry) * 3) - 1;
     gp.base = (unsigned int)&gdt;
@@ -63,7 +42,10 @@ void gdt_install() {
     *  this entry's access byte says it's a Data Segment */
     gdt_set_gate(2, 0, 0xFFFFFFFF, 0x92, 0xCF);
 
-    //Install the new GTD
+    //Install the new GDT
     gdt_flush();
-    puts("GTD Successfully Installed!\n");
+}
+
+int get_gdt_size(){
+    return sizeof(gdt);
 }

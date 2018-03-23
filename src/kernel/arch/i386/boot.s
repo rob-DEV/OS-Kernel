@@ -100,6 +100,6 @@ _start:
 	   non-maskable interrupt occurring or due to system management mode.
 	*/
 	cli
-
+    hlt
 
 .size _start, . - _start
