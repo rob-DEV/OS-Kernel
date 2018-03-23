@@ -10,7 +10,6 @@
 #include "../../arch/i386/include/arch_terminal.h"
 
 bool print(const char* data, size_t length);
-
 int printf(const char* __restrict format, ...);
 
 #endif //OS_STDIO_H

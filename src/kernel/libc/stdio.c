@@ -8,8 +8,10 @@
 #include <stdbool.h>
 #include <stdarg.h>
 
-#include "libc/include/stdio.h"
-#include "arch/i386/include/string.h"
+#include "../arch/i386/include/string.h"
+#include "include/stdio.h"
+#include "include/itoa.h"
+char buffer[512];
 
 bool print(const char* data, size_t length) {
     const unsigned char* bytes = (const unsigned char*) data;
@@ -18,6 +20,7 @@ bool print(const char* data, size_t length) {
             return false;
     return true;
 }
+
 int printf(const char* __restrict format, ...){
     va_list parameters;
     va_start(parameters, format);
@@ -68,6 +71,19 @@ int printf(const char* __restrict format, ...){
             if (!print(str, len))
                 return -1;
             written += len;
+        }
+        else if (*format == 'd') {
+            format++;
+            int input = va_arg(parameters, int /* char promotes to int */);
+
+            itoa(input, buffer);
+            if (!maxrem) {
+                // TODO: Set errno to EOVERFLOW.
+                return -1;
+            }
+            if (!print(buffer, strlen(buffer)))
+                return -1;
+            written++;
         } else {
             format = format_begun_at;
             size_t len = strlen(format);

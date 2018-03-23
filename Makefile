@@ -6,7 +6,8 @@ LN_FLAGS = -T linker.ld -melf_i386
 
 
 C_FILE = $(wildcard src/kernel/*.c) \
-           $(wildcard src/kernel/arch/i386/*.c)
+           $(wildcard src/kernel/arch/i386/*.c) \
+           $(wildcard src/kernel/libc/*.c)
 C_SRC = $(C_FILE:.c=)
 
 

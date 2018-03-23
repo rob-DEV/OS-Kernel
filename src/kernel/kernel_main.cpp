@@ -14,9 +14,14 @@ void kernel_main(void)
     gdt_install();
     puts("-------------------------- C lib from here on out... ---------------------------");
 
-    int A = 65;
-
-    printf("%c is converting integers to characters lol.", A);
+    printf("printf: TEST const char*: %s \n", "STRING SUBSTITUTE!");
+    int a = 15;
+    printf("printf: TEST INT(15): %d \n", a);
+    printf("printf: TEST INT(12586): %d \n", 12586);
+    printf("printf: TEST INT(55): %d \n", 55);
+    printf("printf: TEST INT(84): %d \n", 84);
+    printf("printf: TEST INT(194): %d \n", 194);
+    printf("printf: TEST INT(17): %d \n", 17);
     for(;;);
 
 
