@@ -2,7 +2,7 @@
 // Created by dev on 19/03/18.
 //
 
-#include "include/string.h"
+#include "include/arch_string.h"
 #include "include/arch_io.h"
 #include "include/arch_terminal.h"
 

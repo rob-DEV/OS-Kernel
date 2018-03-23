@@ -2,10 +2,10 @@
 // Created by dev on 19/03/18.
 //
 
-#ifndef OS_TERMINAL_H
-#define OS_TERMINAL_H
+#ifndef OS_ARCH_TERMINAL_H
+#define OS_ARCH_TERMINAL_H
 
-#include "types.h"
+#include "arch_types.h"
 
 enum vga_color{
     VGA_COLOR_BLACK = 0,
@@ -35,4 +35,4 @@ void puts(const char *str);
 void linebreak(void);
 void cls(void);
 
-#endif //OS_TERMINAL_H
+#endif //OS_ARCH_TERMINAL_H

@@ -2,10 +2,10 @@
 // Created by dev on 22/03/18.
 //
 
-#ifndef OS_GDT_H
-#define OS_GDT_H
+#ifndef OS_ARCH_GDT_H
+#define OS_ARCH_GDT_H
 
-#include "types.h"
+#include "arch_types.h"
 
 /* Should be called by main. This will setup the special GDT
 *  pointer, set up the first 3 entries in our GDT, and then
@@ -22,4 +22,4 @@ void gdt_set_gate(int num, unsigned long base, unsigned long limit, unsigned cha
 *  reload the new segment registers */
 extern "C" void gdt_flush();
 
-#endif //OS_GDT_H
+#endif //OS_ARCH_GDT_H

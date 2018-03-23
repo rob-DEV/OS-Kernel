@@ -2,8 +2,8 @@
 // Created by dev on 20/03/18.
 //
 
-#ifndef OS_ARCH_STRING_H
-#define OS_ARCH_STRING_H
+#ifndef OS_STRING_H
+#define OS_STRING_H
 
 #include "types.h"
 

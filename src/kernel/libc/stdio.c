@@ -8,9 +8,11 @@
 #include <stdbool.h>
 #include <stdarg.h>
 
-#include "../arch/i386/include/string.h"
-#include "include/stdio.h"
+#include "include/string.h"
 #include "include/itoa.h"
+#include "include/stdio.h"
+
+
 char buffer[512];
 
 bool print(const char* data, size_t length) {

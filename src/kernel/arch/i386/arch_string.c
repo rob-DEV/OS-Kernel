@@ -1,7 +1,7 @@
 //
 // Created by dev on 22/03/18.
 //
-#include "include/types.h"
+#include "include/arch_types.h"
 
 uint16_t strlen(const char* c){
     char i;

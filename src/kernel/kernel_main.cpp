@@ -1,5 +1,5 @@
 #include "arch/i386/include/arch_terminal.h"
-#include "arch/i386/include/archgdt.h"
+#include "arch/i386/include/arch_gdt.h"
 
 #include "libc/include/stdio.h"
 

@@ -6,6 +6,7 @@
 #define OS_CSTDLIB_H
 
 #include "include/types.h"
+#include "include/string.h"
 #include "include/stdio.h"
 #include "include/itoa.h"
 

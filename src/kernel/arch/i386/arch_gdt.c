@@ -1,7 +1,7 @@
 //
 // Created by dev on 22/03/18.
 //
-#include "include/archgdt.h"
+#include "include/arch_gdt.h"
 #include "include/arch_terminal.h"
 
 /* Defines a GDT entry. We say packed, because it prevents the
