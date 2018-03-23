@@ -2,9 +2,9 @@
 // Created by dev on 19/03/18.
 //
 
-#include "include/mem_util.h"
-#include "include/io.h"
-#include "include/terminal.h"
+#include "include/string.h"
+#include "include/arch_io.h"
+#include "include/arch_terminal.h"
 
 const uint16_t VGA_WIDTH = 80;
 const uint16_t VGA_HEIGHT = 25;
@@ -61,7 +61,7 @@ void set_video_color(enum vga_color fg, enum vga_color bg) {
     terminal_color = vga_entry_color(fg, bg);
     cls();
 }
-void putch(char c) {
+int putch(char c) {
     if (c == '\n' || c == '\r')
     {
         terminal_cur_x = 0;
@@ -87,8 +87,8 @@ void putch(char c) {
         memset(VGA_MEMORY + ((VGA_WIDTH * (VGA_HEIGHT - 1)) * 2), 0, VGA_WIDTH * 2);
         terminal_cur_y--;
     }
-
     move_csr();
+    return 0;
 }
 void puts(const char *str) {
     print(str);

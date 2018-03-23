@@ -30,7 +30,7 @@ uint8_t vga_entry_color(enum vga_color fg, enum vga_color bg);
 
 void init_terminal(void);
 void set_video_color(enum vga_color fg, enum vga_color bg);
-void putch(char c);
+int putch(char c);
 void puts(const char *str);
 void linebreak(void);
 void cls(void);

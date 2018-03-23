@@ -2,14 +2,15 @@
 // Created by dev on 20/03/18.
 //
 
-#ifndef OS_STRING_H
-#define OS_STRING_H
+#ifndef OS_ARCH_STRING_H
+#define OS_ARCH_STRING_H
 
 #include "types.h"
 
 uint16_t strlen(const char* c);
-char* substring(char* str, uint16_t start, uint16_t end);
-char* int_to_string(int32_t input);
+void memcpy(void* src, void* dst , size_t size);
+void memset(void* dst, uint32_t size, uint8_t fill);
+void *memmove(void *dst_void, const void *src_void, size_t length);
 
 
-#endif //OS_STRING_H
+#endif //OS_ARCH_STRING_H

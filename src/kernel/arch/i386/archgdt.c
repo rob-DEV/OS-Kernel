@@ -1,8 +1,8 @@
 //
 // Created by dev on 22/03/18.
 //
-#include "include/gdt.h"
-#include "include/terminal.h"
+#include "include/archgdt.h"
+#include "include/arch_terminal.h"
 
 /* Defines a GDT entry. We say packed, because it prevents the
 *  compiler from doing things that it thinks is best: Prevent
