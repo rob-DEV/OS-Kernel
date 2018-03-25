@@ -4,13 +4,13 @@ A simple OS Kernel written in C++ with an assembly bootloader.
 
 What does it does:
 
-    Prints some text to the screen from a C++ Kernel and hangs.
+    Global Descriptor Table
+    Interrupt Descriptor Table
+    Simple C library - printf() etc
 
 What is it going to do?
 
     Keyboard Input
-    Proper terminal
-    Global Descriptor Table
     Paging
     Memory allocation (heap)
     A GUI
