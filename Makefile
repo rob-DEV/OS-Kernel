@@ -42,7 +42,7 @@ link:
 		ld $(LN_FLAGS) -o latest.bin $(OUT)
 
 run:
-	qemu-system-i386 -kernel latest.bin
+	qemu-system-i386 -kernel  latest.bin -m 512M
 
 clean:
 	rm -f $(OUT)

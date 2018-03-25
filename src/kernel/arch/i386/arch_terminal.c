@@ -14,7 +14,6 @@ unsigned char*  VGA_MEMORY = (unsigned char*)0xb8000;
 static size_t terminal_cur_x;
 static size_t terminal_cur_y;
 static uint8_t terminal_color;
-unsigned char*  terminal_buffer;
 
 
 uint8_t vga_entry_color(enum vga_color fg, enum vga_color bg) {
@@ -49,11 +48,7 @@ void move_csr(void) {
     outportb(0x3D5, temp);
 }
 
-/* These define our textpointer, our background and foreground
-*  colors (attributes), and x and y cursor coordinates */
-unsigned short *textmemptr;
 int attrib = 0x0F;
-int csr_x = 0, csr_y = 0;
 
 void scroll(void)
 {
@@ -64,32 +59,35 @@ void scroll(void)
     blank = 0x20 | (attrib << 8);
 
     /* Row 25 is the end, this means we need to scroll up */
-    if(csr_y >= 25)
+    if(terminal_cur_y >= 25)
     {
         /* Move the current text chunk that makes up the screen
         *  back in the buffer by a line */
-        temp = csr_y - 25 + 1;
-        memcpy (textmemptr, textmemptr + temp * 80, (25 - temp) * 80 * 2);
+        temp = terminal_cur_y - 25 + 1;
+        memcpy (VGA_MEMORY, VGA_MEMORY + temp * 80, (25 - temp) * 80 * 2);
 
         /* Finally, we set the chunk of memory that occupies
         *  the last line of text to our 'blank' character */
-        memsetw (textmemptr + (25 - temp) * 80, blank, 80);
-        csr_y = 25 - 1;
+        memsetw (VGA_MEMORY + (25 - temp) * 80, blank, 80);
+        terminal_cur_y = 25 - 1;
     }
 }
 
 void init_terminal(void) {
+    //does need to be called as setting the colour does this automatically
+    //TODO: refactor
     terminal_cur_x = 0;
     terminal_cur_y = 0;
     terminal_color = vga_entry_color(VGA_COLOR_WHITE, VGA_COLOR_BLACK);
     cls();
 }
 void set_video_color(enum vga_color fg, enum vga_color bg) {
-
+    init_terminal();
     terminal_color = vga_entry_color(fg, bg);
     cls();
 }
 int putch(char c) {
+
     if (c == '\n' || c == '\r')
     {
         terminal_cur_x = 0;
@@ -112,7 +110,7 @@ int putch(char c) {
 
     if (terminal_cur_y == VGA_HEIGHT) {
         memmove(VGA_MEMORY, VGA_MEMORY + (VGA_WIDTH * 2), (VGA_WIDTH * (VGA_HEIGHT - 1)) * 2);
-        memset(VGA_MEMORY + ((VGA_WIDTH * (VGA_HEIGHT - 1)) * 2), 0, VGA_WIDTH * 2);
+        memset(VGA_MEMORY + ((VGA_WIDTH * (VGA_HEIGHT - 1)) * 2), VGA_WIDTH * 2, 0);
         terminal_cur_y--;
     }
     scroll();

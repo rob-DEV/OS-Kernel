@@ -38,20 +38,12 @@ void irq_install_handler(int irq, void (*handler)(registers_t *r))
     irq_routines[irq] = (void*)handler;
 }
 
-/* This clears the handler for a given IRQ */
 void irq_uninstall_handler(int irq)
 {
     irq_routines[irq] = 0;
 }
 
-/* Normally, IRQs 0 to 7 are mapped to entries 8 to 15. This
-*  is a problem in protected mode, because IDT entry 8 is a
-*  Double Fault! Without remapping, every time IRQ0 fires,
-*  you get a Double Fault Exception, which is NOT actually
-*  what's happening. We send commands to the Programmable
-*  Interrupt Controller (PICs - also called the 8259's) in
-*  order to make IRQ0 to 15 be remapped to IDT entries 32 to
-*  47 */
+
 void irq_remap(void)
 {
     outportb(0x20, 0x11);
@@ -66,9 +58,6 @@ void irq_remap(void)
     outportb(0xA1, 0x0);
 }
 
-/* We first remap the interrupt controllers, and then we install
-*  the appropriate ISRs to the correct entries in the IDT. This
-*  is just like installing the exception handlers */
 void irq_install()
 {
     irq_remap();
@@ -89,6 +78,9 @@ void irq_install()
     idt_set_gate(45, (unsigned)irq13, 0x08, 0x8E);
     idt_set_gate(46, (unsigned)irq14, 0x08, 0x8E);
     idt_set_gate(47, (unsigned)irq15, 0x08, 0x8E);
+
+    //restarting interrupts so this can actually work..
+    __asm__ __volatile__ ("sti");
 }
 
 extern "C" void irq_handler(registers_t *r)
@@ -103,7 +95,6 @@ extern "C" void irq_handler(registers_t *r)
     {
         handler(r);
     }
-
     /* If the IDT entry that was invoked was greater than 40
     *  (meaning IRQ8 - 15), then we need to send an EOI to
     *  the slave controller */

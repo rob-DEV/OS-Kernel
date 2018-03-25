@@ -6,6 +6,6 @@
 #define OS_ARCH_H
 
 //REFERENCE ARCH
-#include "../../arch/i386/include/arch_terminal.h"
+#include "../../arch/i386/include/arch.h"
 
 #endif //OS_ARCH_H

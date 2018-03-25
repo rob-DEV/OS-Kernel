@@ -11,6 +11,7 @@
 #include "arch_idt.h"
 #include "arch_isrs.h"
 #include "arch_irq.h"
+#include "arch_timer.h"
 
 
 #endif //OS_ARCH_i386_H

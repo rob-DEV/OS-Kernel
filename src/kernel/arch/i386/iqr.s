@@ -114,7 +114,7 @@ irq15:
     jmp irq_common_stub
 
 .extern irq_handler
-.type fault_handler, @function
+.type irq_handler, @function
 
 //This is a stub that we have created for IRQ based ISRs. This calls
 //'irq_handler' in our C code. We need to create this in an 'irq.c'

@@ -3,7 +3,6 @@
 extern "C"
 void kernel_init(uint32_t magic, multiboot_info_t* mbi)
 {
-    init_terminal();
     set_video_color(VGA_COLOR_WHITE, VGA_COLOR_BLACK);
 
     printf("Initializing Kernel...\n");
@@ -37,6 +36,18 @@ void kernel_main(void)
     printf("Installing Interrupt Requests!\n");
     irq_install();
     printf("IRQs Installed!\n");
+
+    printf("Installing Time*!\n");
+    timer_install();
+    printf("Time* Installed!\n");
+
+    printf("Waiting 50 ticks!\n");
+    timer_wait_ticks(50);
+    printf("End Wait!\n");
+
+    printf("Waiting 3 seconds!\n");
+    sleep(3);
+    printf("End Wait!\n");
 
     for(;;);
 }
