@@ -21,6 +21,8 @@ struct idt_ptr
     unsigned int base;
 } __attribute__((packed));
 
+extern "C" void idt_load();
+
 /* Use this function to set an entry in the IDT. Alot simpler
 *  than twiddling with the GDT ;) */
 void idt_set_gate(unsigned char num, unsigned long base, unsigned short sel, unsigned char flags);
@@ -28,7 +30,7 @@ void idt_set_gate(unsigned char num, unsigned long base, unsigned short sel, uns
 /* Installs the IDT */
 void idt_install();
 
-/* This exists in 'start.asm', and is used to load our IDT */
-extern "C" void idt_load();
+uintptr_t get_idt_install_location();
+
 
 #endif //OS_ARCH_IDT_H
