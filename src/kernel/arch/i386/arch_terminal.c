@@ -49,6 +49,34 @@ void move_csr(void) {
     outportb(0x3D5, temp);
 }
 
+/* These define our textpointer, our background and foreground
+*  colors (attributes), and x and y cursor coordinates */
+unsigned short *textmemptr;
+int attrib = 0x0F;
+int csr_x = 0, csr_y = 0;
+
+void scroll(void)
+{
+    unsigned blank, temp;
+
+    /* A blank is defined as a space... we need to give it
+    *  backcolor too */
+    blank = 0x20 | (attrib << 8);
+
+    /* Row 25 is the end, this means we need to scroll up */
+    if(csr_y >= 25)
+    {
+        /* Move the current text chunk that makes up the screen
+        *  back in the buffer by a line */
+        temp = csr_y - 25 + 1;
+        memcpy (textmemptr, textmemptr + temp * 80, (25 - temp) * 80 * 2);
+
+        /* Finally, we set the chunk of memory that occupies
+        *  the last line of text to our 'blank' character */
+        memsetw (textmemptr + (25 - temp) * 80, blank, 80);
+        csr_y = 25 - 1;
+    }
+}
 
 void init_terminal(void) {
     terminal_cur_x = 0;
@@ -87,6 +115,7 @@ int putch(char c) {
         memset(VGA_MEMORY + ((VGA_WIDTH * (VGA_HEIGHT - 1)) * 2), 0, VGA_WIDTH * 2);
         terminal_cur_y--;
     }
+    scroll();
     move_csr();
     return 0;
 }

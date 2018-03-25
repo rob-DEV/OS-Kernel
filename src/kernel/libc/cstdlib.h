@@ -7,7 +7,6 @@
 
 #include "include/types.h"
 #include "include/string.h"
-#include "include/itoa.h"
 #include "include/stdio.h"
 
 #endif //OS_CSTDLIB_H

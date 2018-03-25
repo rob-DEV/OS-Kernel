@@ -22,7 +22,19 @@ stack_top:
 .type _start, @function
 _start:
 	mov $stack_top, %esp
+
+    //32-bit physical address of the Multiboot information structure
+	pushl %ebx
+	//EAX containing 0x2BAD002
+	pushl %eax
+
+
+	call kernel_init
+	popl %eax
+	popl %ebx
+
 	call kernel_main
+
 	cli
     hlt
 

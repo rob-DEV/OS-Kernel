@@ -26,6 +26,11 @@ void memset(void* dst, uint32_t size, uint8_t fill){
         ((uint8_t*)dst)[i] = fill;
     }
 }
+void memsetw(void* dst, uint32_t size, uint16_t fill){
+    for(uint32_t i = 0; i < size; i++){
+        ((uint16_t*)dst)[i] = fill;
+    }
+}
 void *memmove(void *dst_void, const void *src_void, size_t length) {
     char *dst = (char*)dst_void;
     const char *src = (const char*)src_void;

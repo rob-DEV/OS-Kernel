@@ -1,12 +1,26 @@
-#include "arch/i386/include/arch.h"
-#include "libc/cstdlib.h"
+#include "system.h"
+
 
 extern "C"
-void kernel_main(void)
+void kernel_init(uint32_t magic, multiboot_info_t* mbi)
 {
     init_terminal();
     set_video_color(VGA_COLOR_WHITE, VGA_COLOR_BLACK);
 
+    printf("Initializing Kernel...\n");
+
+    if(MULTIBOOT_BOOTLOADER_MAGIC != magic)
+        printf("Invalid Magic Number!! Attempting Boot...\n");
+
+    printf("Magic Number: 0x%d\n", magic);
+    parse_multiboot_info(magic, mbi);
+
+
+}
+
+extern "C"
+void kernel_main(void)
+{
     printf("--------------------------------------------------------------------------------");
     printf("-------------- Welcome to Kernel OS ver 1.0 with Pseudo C library --------------");
     printf("--------------------------------------------------------------------------------");
@@ -23,10 +37,14 @@ void kernel_main(void)
     isrs_install();
     printf("ISRS Installed!\n");
 
-
-    int result = 10 / 5;
-
-    printf("Answer: %d", &result);
-
+    printf("Scroll Test 1\n");
+    printf("Scroll Test 1\n");
+    printf("Scroll Test 1\n");
+    printf("Scroll Test 1\n");
+    printf("Scroll Test 1\n");
+    printf("Scroll Test 1\n");
+    printf("Scroll Test 1\n");
+    printf("Scroll Test 1\n");
+    printf("Scroll Test 1\n");
     for(;;);
 }
