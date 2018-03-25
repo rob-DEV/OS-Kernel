@@ -1,5 +1,4 @@
-//GDT
-.global gdt_flush     /*Allows the C code to link to this*/
+.global gdt_flush     /*Allows the C code to linkextern "C" to this*/
 .type gdt_flush, %function     /
 .extern gp            /*Says that '_gp' is in another file*/
 gdt_flush:

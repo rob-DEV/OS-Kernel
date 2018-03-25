@@ -8,5 +8,7 @@
 #include "arch_terminal.h"
 #include "arch_gdt.h"
 #include "arch_idt.h"
+#include "arch_isrs.h"
+
 
 #endif //OS_ARCH_i386_H

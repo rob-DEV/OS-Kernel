@@ -2,7 +2,7 @@
 // Created by dev on 22/03/18.
 //
 #include "include/arch_gdt.h"
-
+#include "../../libc/include/stdio.h"
 /* Our GDT, with 3 entries, and finally our special GDT pointer */
 struct gdt_entry gdt[3];
 struct gdt_ptr gp;
@@ -46,6 +46,7 @@ void gdt_install() {
     gdt_flush();
 }
 
-int get_gdt_size(){
-    return sizeof(gdt);
+uintptr_t get_gdt_install_location()
+{
+    return (uintptr_t)&gdt[0];
 }

@@ -26,7 +26,6 @@ struct gdt_ptr {
     unsigned int base;
 } __attribute__((packed));
 
-
 /* Should be called by main. This will setup the special GDT
 *  pointer, set up the first 3 entries in our GDT, and then
 *  finally call gdt_flush() in our assembler file in order
@@ -37,7 +36,7 @@ void gdt_install();
 /* Setup a descriptor in the Global Descriptor Table */
 void gdt_set_gate(int num, unsigned long base, unsigned long limit, unsigned char access, unsigned char gran);
 
-int get_gdt_size();
+uintptr_t get_gdt_install_location();
 
 /* This will be a function in start.asm. We use this to properly
 *  reload the new segment registers */

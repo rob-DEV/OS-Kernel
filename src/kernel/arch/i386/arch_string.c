@@ -20,6 +20,7 @@ void memcpy(void* src, void* dst , size_t size){
         bdst[i] = bsrc[i];
     }
 }
+
 void memset(void* dst, uint32_t size, uint8_t fill){
     for(uint32_t i = 0; i < size; i++){
         ((uint8_t*)dst)[i] = fill;
