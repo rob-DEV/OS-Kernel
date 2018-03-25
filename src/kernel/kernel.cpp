@@ -24,16 +24,19 @@ void kernel_main(void)
 
     printf("Installing GDT!\n");
     gdt_install();
-    printf("GDT Installed at Address: 0x%x\n", get_gdt_install_location());
+    printf("GDT Installed at Address: 0x%x\n", ((unsigned int)get_gdt_install_location()));
 
     printf("Installing IDT!\n");
     idt_install();
-    printf("GDT Installed at Address: 0x%x\n", get_idt_install_location());
+    printf("GDT Installed at Address: 0x%x\n", ((unsigned int)get_idt_install_location()));
 
     printf("Installing Interrupt Service!\n");
     isrs_install();
     printf("ISRS Installed!\n");
 
+    printf("Installing Interrupt Requests!\n");
+    irq_install();
+    printf("IRQs Installed!\n");
 
     for(;;);
 }

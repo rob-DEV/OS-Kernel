@@ -260,7 +260,7 @@ isr31:
 //up for kernel mode segments, calls the C-level fault handler,
 //and finally restores the stack frame.
 isr_common_stub:
-    pushal  # Push registers (edi,esi,ebp,esp.ebx,edx.ecx.eax)
+    pusha  # Push registers (edi,esi,ebp,esp.ebx,edx.ecx.eax)
     push %ds # Push data segments
     push %es
     push %fs

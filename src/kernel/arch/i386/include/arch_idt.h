@@ -5,6 +5,8 @@
 #ifndef OS_ARCH_IDT_H
 #define OS_ARCH_IDT_H
 
+#include "arch_types.h"
+
 /* Defines an IDT entry */
 struct idt_entry
 {
