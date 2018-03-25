@@ -1,5 +1,3 @@
-////In just a few pages in this tutorial, we will add our Interrupt
-////Service Routines (ISRs) right here!
 .global isr0
 .global isr1
 .global isr2

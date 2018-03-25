@@ -6,7 +6,6 @@
 #define OS_ARCH_ISRS_H
 
 #include "arch_types.h"
-#include "arch_terminal.h"
 
 /* These are function prototypes for all of the exception
 *  handlers: The first 32 entries in the IDT are reserved

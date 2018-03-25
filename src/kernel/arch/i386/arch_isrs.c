@@ -1,7 +1,7 @@
 //
 // Created by dev on 23/03/18.
 //
-
+#include "include/arch_terminal.h"
 #include "include/arch_isrs.h"
 #include "include/arch_idt.h"
 
