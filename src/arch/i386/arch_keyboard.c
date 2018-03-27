@@ -35,5 +35,5 @@ void keyboard_handler(registers_t *r) {
 
 void keyboard_install()
 {
-    irq_install_handler(0, keyboard_handler);
+    irq_install_handler(1, keyboard_handler);
 }

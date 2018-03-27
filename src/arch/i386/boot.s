@@ -38,6 +38,7 @@ _start:
 	call kernel_main
 
 	cli
+
     hlt
 
 .size _start, . - _start
