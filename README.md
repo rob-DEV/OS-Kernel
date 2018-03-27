@@ -7,14 +7,14 @@ What does it does:
     Global Descriptor Table
     Interrupt Descriptor Table
     Simple C library - printf() etc
+    Keyboard Input
+    Memory allocation (heap)
 
 What is it going to do?
 
-    Keyboard Input
     Paging
-    Memory allocation (heap)
     A GUI
 
-To build the source run make in the os directory
+To build the source run `build.sh` in the os directory
 Then run the bin file using qemu
   `qemu -kernel latest.bin`
