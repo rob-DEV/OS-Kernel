@@ -2,9 +2,7 @@
 // Created by dev on 25/03/18.
 //
 
-#include "../../system.h"
-#include "include/arch_multiboot.h"
-
+#include "../../kernel/include/system.h"
 
 // Check if the bit BIT in FLAGS is set.
 #define CHECK_FLAG(flags,bit)   ((flags) & (1 << (bit)))
@@ -26,7 +24,7 @@ void parse_multiboot_info(uint32_t magic, multiboot_info_t* mbi)
     //mbi = (multiboot_info_t *)addr;
 
     // Print out the flags.
-    printf("flags = 0x%d\n", (unsigned)mbi->flags);
+    printf("Flags = 0x%d\n", (unsigned)mbi->flags);
 
     // Are mem_* valid?
     if (CHECK_FLAG(mbi->flags, 0))

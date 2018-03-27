@@ -5,7 +5,7 @@
 #ifndef OS_SYSTEM_H
 #define OS_SYSTEM_H
 
-#include "arch/i386/include/arch.h"
-#include "libc/cstdlib.h"
+#include "../../arch/i386/include/arch.h"
+#include "../../libc/cstdlib.h"
 
 #endif //OS_SYSTEM_H

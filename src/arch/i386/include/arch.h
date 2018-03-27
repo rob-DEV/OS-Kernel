@@ -13,5 +13,7 @@
 #include "arch_irq.h"
 #include "arch_timer.h"
 
+#include "arch_keyboard.h"
+
 
 #endif //OS_ARCH_i386_H

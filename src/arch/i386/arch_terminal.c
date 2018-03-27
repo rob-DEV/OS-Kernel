@@ -94,6 +94,13 @@ int putch(char c) {
         terminal_cur_y++;
 
     }
+    else if(c == '\b')
+    {
+        //MOVE THE CURSOR BACKWARDS
+        //THIS DOESN'T DELETE THE CHARACTER
+        //IT SIMPLY ALLOWS YOU TO OVERWRITE IT
+        terminal_cur_x--;
+    }
     else
     {
         unsigned int position = terminal_cur_y * VGA_WIDTH + terminal_cur_x;

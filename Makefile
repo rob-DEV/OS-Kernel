@@ -6,17 +6,17 @@ LN_FLAGS = -T linker.ld -melf_i386
 
 
 C_FILE = $(wildcard src/kernel/*.c) \
-           $(wildcard src/kernel/arch/i386/*.c) \
-           $(wildcard src/kernel/libc/*.c)
+           $(wildcard src/arch/i386/*.c) \
+           $(wildcard src/libc/*.c)
 C_SRC = $(C_FILE:.c=)
 
 
 CXX_FILE = $(wildcard src/kernel/*.cpp) \
-           $(wildcard src/kernel/arch/i386/*.cpp)
+           $(wildcard src/arch/i386/*.cpp)
 CXX_SRC = $(CXX_FILE:.c=)
 
 
-ASM_FILE = $(wildcard src/kernel/arch/i386/*.s)
+ASM_FILE = $(wildcard src/arch/i386/*.s)
 ASM_SOURCE = $(ASM_FILE:.s=)
 
 OUT_TEMP = $(wildcard a_out/*.o)
