@@ -1,7 +1,7 @@
 #include "include/system.h"
 
 extern "C"
-void kernel_init(uint32_t magic, multiboot_info_t* mbi)
+void kernel_init(multiboot_info_t* mbi, uint32_t magic)
 {
     set_video_color(VGA_COLOR_WHITE, VGA_COLOR_BLACK);
     printf("Initializing Kernel...\n");
@@ -30,6 +30,9 @@ void kernel_init(uint32_t magic, multiboot_info_t* mbi)
 
     keyboard_install();
     printf("Keyboard Installed!\n");
+
+    heap_install(mbi->mem_lower, mbi->mem_upper);
+    printf("Heap Initalized\n");
 }
 
 extern "C"
@@ -39,13 +42,16 @@ void kernel_main(void)
     printf("------------------------- Welcome to Kernel OS ver 1.0 -------------------------");
     printf("--------------------------------------------------------------------------------");
 
-    int* high_mem = (int*)0x25000000000;
+    int * int_ptr = (int*)malloc(4);
+    *int_ptr = 25;
+    printf("Int Ptr Malloc Test: Address: 0x%x, Val: %d\n", int_ptr, *int_ptr);
 
-    printf("At address: %x == %d\n", high_mem, *high_mem);
+    int * int_ptr2 = (int*)malloc(4);
+    *int_ptr2 = 45;
+    printf("Int Ptr Malloc Test: Address: 0x%x, Val: %d\n", int_ptr2, *int_ptr2);
 
-    *high_mem = 25;
-
-    printf("At address: %x == %d\n", high_mem, *high_mem);
+    free(int_ptr);
+    printf("Int Ptr Malloc Test: Address: 0x%x, Val: %d\n", int_ptr, *int_ptr);
 
     for(;;);
 }

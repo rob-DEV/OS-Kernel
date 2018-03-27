@@ -13,5 +13,6 @@
 #include "include/string.h"
 #include "include/stdio.h"
 #include "include/time.h"
+#include "include/memory.h"
 
 #endif //OS_CSTDLIB_H

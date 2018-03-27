@@ -23,15 +23,17 @@ stack_top:
 _start:
 	mov $stack_top, %esp
 
+    //EAX containing 0x2BAD002
+	push %eax
     //32-bit physical address of the Multiboot information structure
 	push %ebx
-	//EAX containing 0x2BAD002
-	push %eax
+
 
 
 	call kernel_init
-	pop %eax
+
 	pop %ebx
+	pop %eax
 
 	call kernel_main
 
