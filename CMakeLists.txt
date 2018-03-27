@@ -1,6 +1,0 @@
-cmake_minimum_required(VERSION 2.8.4)
-project(os)
-
-set(CMAKE_CXX_STANDARD 11)
-
-add_executable(os src/kernel/kernel.cpp src/kernel/arch/i386/include/arch_types.h src/kernel/arch/i386/arch_terminal.c src/kernel/arch/i386/include/arch_terminal.h src/kernel/arch/i386/include/arch_string.h src/kernel/arch/i386/arch_gdt.c src/kernel/arch/i386/include/arch_gdt.h src/kernel/arch/i386/arch_string.c src/kernel/arch/i386/arch_io.c src/kernel/arch/i386/include/arch_io.h src/libc/stdio.c src/libc/include/stdio.h src/libc/itoa.c src/libc/cstdlib.h src/libc/include/atoi.h src/libc/atoi.c src/libc/include/arch.h src/kernel/arch/i386/include/arch.h src/kernel/arch/i386/include/arch_idt.h src/kernel/arch/i386/arch_idt.c src/kernel/arch/i386/arch_isrs.c src/kernel/arch/i386/include/arch_isrs.h src/kernel/arch/i386/include/arch_multiboot.h src/kernel/arch/i386/arch_multiboot.c src/kernel/include/system.h src/kernel/arch/i386/include/arch_irq.h src/kernel/arch/i386/arch_irq.c src/kernel/arch/i386/arch_timer.c src/kernel/arch/i386/include/arch_timer.h src/libc/include/time.h src/libc/time.c src/libc/include/memory.h src/libc/memory.c src/kernel/arch/i386/include/arch_keyboard.h src/kernel/arch/i386/arch_keyboard.c)
