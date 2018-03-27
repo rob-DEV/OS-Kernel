@@ -1,6 +1,6 @@
 A simple OS Kernel written in C++ with an assembly bootloader.
 
-![1](https://github.com/rob-DEV/os-kernel/blob/master/res/4.PNG)
+![1](https://github.com/rob-DEV/os-kernel/blob/master/res/5.PNG)
 
 What does it does:
 
