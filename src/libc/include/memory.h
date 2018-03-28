@@ -5,7 +5,10 @@
 #ifndef OS_MEMORY_H
 #define OS_MEMORY_H
 
-#include "types.h"
+#include <arch.h>
+#include <system.h>
+
+#include "stdio.h"
 
 typedef struct memory_chunk {
     memory_chunk *next;

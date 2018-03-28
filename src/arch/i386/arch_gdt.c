@@ -2,7 +2,7 @@
 // Created by dev on 22/03/18.
 //
 #include "include/arch_gdt.h"
-#include "../../libc/include/stdio.h"
+
 /* Our GDT, with 3 entries, and finally our special GDT pointer */
 struct gdt_entry gdt[3];
 struct gdt_ptr gp;

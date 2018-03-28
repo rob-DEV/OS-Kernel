@@ -6,8 +6,7 @@
 #define OS_STDIO_H
 #define EOF -1
 
-#include "types.h"
-#include "arch.h"
+#include <system.h>
 
 bool print(const char* data, size_t length);
 int printf(const char* __restrict format, ...);

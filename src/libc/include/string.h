@@ -5,7 +5,7 @@
 #ifndef OS_STRING_H
 #define OS_STRING_H
 
-#include "types.h"
+#include <system.h>
 
 uint16_t strlen(const char* c);
 void memcpy(void* src, void* dst , size_t size);

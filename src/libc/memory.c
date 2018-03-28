@@ -91,3 +91,17 @@ void free(void* ptr){
     printf("Chunk allocated: %d\n", chunk->allocated);
 
 }
+
+void* operator new(size_t size) {
+
+    void* allocation_result = malloc(size);
+    if(allocation_result == NULL)
+        return NULL;
+    return allocation_result;
+}
+void* operator new[](size_t size) {
+    void* allocation_result = malloc(size);
+    if(allocation_result == NULL)
+        return NULL;
+    return allocation_result;
+}

@@ -5,8 +5,8 @@
 #ifndef OS_ITOA_H
 #define OS_ITOA_H
 
-#include "types.h"
-#include "../../arch/i386/include/arch_string.h"
+#include <arch.h>
+#include <system.h>
 
 void reverse(char s[]);
 

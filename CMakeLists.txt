@@ -5,6 +5,9 @@ set(CMAKE_CXX_STANDARD 11)
 
 add_executable(
         os src/kernel/kernel.cpp
+        src/arch/i386/arch_terminal.c
         src/kernel/include/ src/kernel/
         src/libc/include/ src/libc/
-        src/arch/i386/include/ src/arch/i386/)
+        src/arch/i386/include/ src/arch/i386/ src/kernel/include/drivers/vga.h src/kernel/drivers/vga.cpp src/kernel/include/common/types.h src/kernel/hardwarecommunication/port.cpp src/kernel/include/hardwarecommunication/port.h)
+
+target_include_directories(os PUBLIC src/kernel/include src/arch/i386/include src/libc/)

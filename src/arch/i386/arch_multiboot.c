@@ -9,6 +9,7 @@
 
 void parse_multiboot_info(uint32_t magic, multiboot_info_t* mbi)
 {
+    /*
     printf("Processing Multiboot Information\n");
 
     //multiboot_info_t* mbi;
@@ -79,5 +80,7 @@ void parse_multiboot_info(uint32_t magic, multiboot_info_t* mbi)
                        (unsigned)(mmap->len >> 32),
                        (unsigned)(mmap->len & 0xffffffff),
                        (unsigned)mmap->type);
+
     }
+    */
 }

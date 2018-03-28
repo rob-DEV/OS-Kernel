@@ -38,7 +38,7 @@ void move_csr(void) {
     /* This sends a command to indicies 14 and 15 in the
     *  CRT Control Register of the VGA controller. These
     *  are the high and low bytes of the index that show
-    *  where the hardware cursor is to be 'blinking'. To
+    *  where the hardwarecommunication cursor is to be 'blinking'. To
     *  learn more, you should look up some VGA specific
     *  programming documents. A great start to graphics:
     *  http://www.brackeen.com/home/vga */
@@ -74,7 +74,7 @@ void scroll(void)
 }
 
 void init_terminal(void) {
-    //does need to be called as setting the colour does this automatically
+    //does not need to be called as setting the colour does this automatically
     //TODO: refactor
     terminal_cur_x = 0;
     terminal_cur_y = 0;

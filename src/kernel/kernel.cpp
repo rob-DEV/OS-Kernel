@@ -1,4 +1,7 @@
-#include "include/system.h"
+#include <system.h>
+#include <drivers/vga.h>
+
+#include <cstdlib.h>
 
 extern "C"
 void kernel_init(multiboot_info_t* mbi, uint32_t magic)
@@ -11,39 +14,50 @@ void kernel_init(multiboot_info_t* mbi, uint32_t magic)
 
     printf("Magic Number: 0x%x\n", magic);
 
-    parse_multiboot_info(magic, mbi);
+    //parse_multiboot_info(magic, mbi);
 
     gdt_install();
-    printf("GDT Installed at Address: 0x%x\n", ((unsigned int)get_gdt_install_location()));
-
     idt_install();
-    printf("IDT Installed at Address: 0x%x\n", ((unsigned int)get_idt_install_location()));
-
     heap_install(mbi->mem_lower, mbi->mem_upper);
-    printf("Heap Initalized!\n");
 }
 
 extern "C"
 void kernel_main(void)
 {
     isrs_install();
-    printf("ISRS Installed!\n");
-
     irq_install();
-    printf("IRQs Installed!\n");
-
     timer_install();
-    printf("PIT Installed!\n");
-    timer_wait_seconds(1);
-
     keyboard_install();
-    printf("Keyboard Installed!\n");
-    timer_wait_seconds(1);
 
     printf("--------------------------------------------------------------------------------");
     printf("------------------------- Welcome to Kernel OS ver 1.0 -------------------------");
     printf("--------------------------------------------------------------------------------");
 
+    printf("Switching to VGA Mode!\n");
+
+    for (int i = 0; i < 3; ++i) {
+
+        if(i != 0)
+            printf("\b\\");
+        else
+            printf("\\");
+        timer_wait_ticks(5);
+        printf("\b|");
+        timer_wait_ticks(5);
+        printf("\b/");
+        timer_wait_ticks(5);
+        printf("\b-");
+        timer_wait_ticks(5);
+    }
+
+
+    OS::Drivers::VideoGraphicsArray vga;
+
+    vga.SetMode(320, 200, 8);
+
+    for(uint8_t y = 0; y < 200; y++)
+        for(uint32_t x = 0; x < 320; x++)
+            vga.PutPixel(x,y, 0x00,0x00, 0xA8);
 
     for(;;);
 }

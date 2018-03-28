@@ -6,6 +6,6 @@
 #define OS_SYSTEM_H
 
 #include "../../arch/i386/include/arch.h"
-#include "../../libc/cstdlib.h"
+#include "common/types.h"
 
 #endif //OS_SYSTEM_H
