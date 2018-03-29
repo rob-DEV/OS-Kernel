@@ -5,6 +5,8 @@
 #include "include/arch_timer.h"
 #include "include/arch_string.h"
 
+#include <shell/shell.h>
+
 /* Handles the keyboard interrupt */
 void keyboard_handler(registers_t *r) {
     unsigned char scancode;
@@ -17,9 +19,7 @@ void keyboard_handler(registers_t *r) {
     } else {
 
         char key_pressed = standard_keymap[scancode];
-        putch(key_pressed);
-
-
+        OS::Shell::GetShell()->PutChar(key_pressed);
 
     }
 }

@@ -2,7 +2,7 @@
 // Created by dev on 27/03/18.
 //
 
-#include "../include/drivers/vga.h"
+#include <drivers/vga.h>
 
 namespace OS { namespace Drivers {
 

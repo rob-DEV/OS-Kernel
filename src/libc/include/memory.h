@@ -7,7 +7,6 @@
 
 #include <arch.h>
 #include <system.h>
-#include <stdio.h>
 
 typedef struct memory_chunk {
     memory_chunk *next;

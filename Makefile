@@ -16,7 +16,8 @@ CXX_FILE = $(wildcard src/arch/i386/*.cpp) \
            $(wildcard src/kernel/*.cpp) \
            $(wildcard src/kernel/drivers/*.cpp) \
            $(wildcard src/kernel/gui/*.cpp) \
-           $(wildcard src/kernel/hardwarecommunication/*.cpp)
+           $(wildcard src/kernel/hardwarecommunication/*.cpp) \
+           $(wildcard src/kernel/shell/*.cpp)
 
 CXX_SRC = $(CXX_FILE:.c=)
 

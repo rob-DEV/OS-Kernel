@@ -2,7 +2,7 @@
 // Created by dev on 26/03/18.
 //
 #include "include/memory.h"
-#include "../kernel/include/system.h"
+
 
 void heap_install(size_t start, size_t size){
 
@@ -58,12 +58,7 @@ void free(void* ptr){
     //this is the reverse of malloc()
     //TODO:
     //find the memory chunk -> address of data - sizeof(memory_chunk_t) == chunk start address
-
     memory_chunk_t* chunk = (memory_chunk_t*)((size_t)ptr - sizeof(memory_chunk_t));
-
-    printf("Freeing memory chunk at 0x%x\n", chunk);
-    printf("Chunk size: %d\n", chunk->size);
-    printf("Chunk allocated: %d\n", chunk->allocated);
 
     //dealloc the memory
     chunk->allocated = false;
@@ -85,11 +80,6 @@ void free(void* ptr){
         if(chunk->next != NULL)
             chunk->next->prev = chunk;
     }
-
-    printf("Freed memory chunk at 0x%x\n", chunk);
-    printf("New Available Chunk size: %d\n", chunk->size);
-    printf("Chunk allocated: %d\n", chunk->allocated);
-
 }
 
 void* operator new(size_t size) {

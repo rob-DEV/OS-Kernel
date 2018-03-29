@@ -2,7 +2,8 @@
 // Created by dev on 27/03/18.
 //
 
-#include "../include/hardwarecommunication/port.h"
+#include <hardwarecommunication/port.h>
+
 namespace OS { namespace HW_COMM {
     Port::Port(uint16_t portnumber) {
         this->portnumber = portnumber;

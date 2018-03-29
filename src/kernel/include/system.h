@@ -6,6 +6,6 @@
 #define OS_SYSTEM_H
 
 #include <arch.h>
-#include "common/types.h"
+#include <common/types.h>
 
 #endif //OS_SYSTEM_H

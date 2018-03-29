@@ -6,7 +6,6 @@
 #define OS_KEYBOARD_H
 
 #include "arch_io.h"
-#include "arch_terminal.h"
 #include "arch_isrs.h"
 #include "arch_irq.h"
 
@@ -49,11 +48,6 @@ static unsigned char standard_keymap[128] =
         0,	/* F12 Key */
         0,	/* All other keys are undefined */
 };
-
-static int command_line_buffer_length = 0;
-static char* command_line_buffer;
-
-extern bool VGA;
 
 void keyboard_handler(registers_t *r);
 
