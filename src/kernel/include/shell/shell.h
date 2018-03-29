@@ -38,8 +38,10 @@ namespace OS {
         Shell();
         ~Shell();
         static Shell* GetShell();
-        void RegisterCommand(const char* commandText, void(*callback)());
+        static bool ShellEnabled;
+        void RegisterCommand(const char *commandText, const char *screen_message, void(*callback)());
         void PutChar(char input);
+        void Printf(const char * __restrict str, ...);
     };
 
 }

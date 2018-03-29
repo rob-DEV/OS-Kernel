@@ -2,7 +2,7 @@
 // Created by dev on 26/03/18.
 //
 #include "include/memory.h"
-
+#include <cstdlib.h>
 
 void heap_install(size_t start, size_t size){
 
@@ -51,17 +51,30 @@ void* malloc(size_t size) {
 
     //return a pointer to the data alloc start address
     //to do this get the result - memory header (memory_chunk_t)
-    return (void*)(((size_t)(allocation_result) +sizeof(memory_chunk_t)));
+    return (void*)(((size_t)(allocation_result) + sizeof(memory_chunk_t)));
 }
 
 void free(void* ptr){
     //this is the reverse of malloc()
-    //TODO:
+
     //find the memory chunk -> address of data - sizeof(memory_chunk_t) == chunk start address
     memory_chunk_t* chunk = (memory_chunk_t*)((size_t)ptr - sizeof(memory_chunk_t));
-
-    //dealloc the memory
+    //deallocate the memory
     chunk->allocated = false;
+
+    uint32_t* chunk_data_ptr = (uint32_t*)chunk + sizeof(memory_chunk_t);
+
+
+    printf("Chunk Address: 0x%x\n", chunk);
+    printf("Space between struct and data (16): Actually: %d\n", ((uint32_t)ptr - (uint32_t)chunk));
+    printf("Freeing Data at: 0x%x\n", (uint32_t)ptr);
+
+    uint32_t* data_address = (uint32_t*)ptr;
+    //TEST NULLIFY ALL MEMORY
+    for (int i = 0; i < chunk->size; ++i) {
+        *data_address = 0;
+        data_address++;
+    }
 
     if(chunk->prev != NULL && !chunk->prev->allocated)
     {

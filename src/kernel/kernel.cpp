@@ -29,7 +29,6 @@ void dumb_load(int count)
 }
 
 void enter_VGA() {
-
     //attempting VGA heap allocation
     VideoGraphicsArray* vga = new VideoGraphicsArray();
     vga->SetMode(320,200,8);
@@ -43,6 +42,11 @@ void enter_VGA() {
         desktop1->Draw(vga);
         timer_wait_ticks(18);
     }
+}
+
+void disableShellInput()
+{
+    Shell::ShellEnabled = false;
 }
 
 extern "C"
@@ -66,28 +70,26 @@ void kernel_init(multiboot_info_t* mbi, uint32_t magic)
 extern "C"
 void kernel_main(void)
 {
-    Shell* shell = Shell::GetShell();
-    shell->RegisterCommand("vga", enter_VGA);
-
     isrs_install();
     irq_install();
     timer_install();
     keyboard_install();
-
-    printf("--------------------------------------------------------------------------------");
     printf("------------------------- Welcome to Kernel OS ver 1.0 -------------------------");
-    printf("--------------------------------------------------------------------------------");
+    Shell* shell = Shell::GetShell();
 
-    printf("Enter vga to enter VGA mode!\n");
-
-    dumb_load(2);
-
-    printf("\n");
+    shell->RegisterCommand("vga", "Type \"vga\" to enter VGA mode", enter_VGA);
+    shell->RegisterCommand("disable", "Type \"disable\" to disable Shell Input", disableShellInput);
 
 
+    printf("size of shell: %d\n", sizeof(Shell));
+    int* a = (int*)malloc(4);
 
+    *a = 258;
 
+    printf("%d at address: 0x%d\n", *a, a);
 
+    free(a);
+    printf("%d at address: 0x%d\n", *a, a);
 
-   while (1);
+    while (1);
 }

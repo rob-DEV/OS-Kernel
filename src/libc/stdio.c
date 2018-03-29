@@ -47,6 +47,7 @@ int uintToHexStr(unsigned int num,char* buff)
 }
 
 int printf(const char* __restrict format, ...){
+
     va_list parameters;
     va_start(parameters, format);
 
