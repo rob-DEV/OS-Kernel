@@ -50,6 +50,11 @@ static unsigned char standard_keymap[128] =
         0,	/* All other keys are undefined */
 };
 
+static int command_line_buffer_length = 0;
+static char* command_line_buffer;
+
+extern bool VGA;
+
 void keyboard_handler(registers_t *r);
 
 void keyboard_install();

@@ -7,10 +7,27 @@ uint16_t strlen(const char* c){
     char i;
     uint16_t length = 0;
     while((i = c[length]) != 0){
-        length++;/* This exists in 'start.asm', and is used to load our IDT */
-extern void idt_load();
+        length++;
     }
     return length;
+}
+
+bool strcmp(const char* a, const char* b)
+{
+    if(strlen(a) != strlen(b))
+        return false;
+
+    while(*a)
+    {
+        if(*a != *b)
+            return false;
+
+        a++; b++;
+    }
+
+    return true;
+
+
 }
 
 void memcpy(void* src, void* dst , size_t size){

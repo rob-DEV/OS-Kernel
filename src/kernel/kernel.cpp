@@ -1,7 +1,11 @@
 #include <system.h>
 #include <drivers/vga.h>
-
+#include <gui/desktop.h>
 #include <cstdlib.h>
+
+using namespace OS;
+using namespace Drivers;
+using namespace GUI;
 
 extern "C"
 void kernel_init(multiboot_info_t* mbi, uint32_t magic)
@@ -21,6 +25,8 @@ void kernel_init(multiboot_info_t* mbi, uint32_t magic)
     heap_install(mbi->mem_lower, mbi->mem_upper);
 }
 
+bool VGA = false;
+
 extern "C"
 void kernel_main(void)
 {
@@ -35,7 +41,8 @@ void kernel_main(void)
 
     printf("Switching to VGA Mode!\n");
 
-    for (int i = 0; i < 3; ++i) {
+
+    for (int i = 0; i < 1; ++i) {
 
         if(i != 0)
             printf("\b\\");
@@ -50,14 +57,16 @@ void kernel_main(void)
         timer_wait_ticks(5);
     }
 
+    printf("\n");
 
-    OS::Drivers::VideoGraphicsArray vga;
+    //attemping VGA heap allocation
+    VideoGraphicsArray* vga = new VideoGraphicsArray();
+    vga->SetMode(320,200,8);
+    Desktop* desktop = new Desktop(320,200, RGB_Color(0x00,0x00,0xA8));
 
-    vga.SetMode(320, 200, 8);
-
-    for(uint8_t y = 0; y < 200; y++)
-        for(uint32_t x = 0; x < 320; x++)
-            vga.PutPixel(x,y, 0x00,0x00, 0xA8);
-
-    for(;;);
+    while (1)
+    {
+        desktop->Draw(vga);
+        timer_wait_ticks(18);
+    }
 }

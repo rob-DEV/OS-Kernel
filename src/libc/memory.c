@@ -86,8 +86,8 @@ void free(void* ptr){
             chunk->next->prev = chunk;
     }
 
-    printf("Freeing memory chunk at 0x%x\n", chunk);
-    printf("Chunk size: %d\n", chunk->size);
+    printf("Freed memory chunk at 0x%x\n", chunk);
+    printf("New Available Chunk size: %d\n", chunk->size);
     printf("Chunk allocated: %d\n", chunk->allocated);
 
 }
@@ -104,4 +104,19 @@ void* operator new[](size_t size) {
     if(allocation_result == NULL)
         return NULL;
     return allocation_result;
+}
+
+void operator delete(void* ptr)
+{
+    free(ptr);
+}
+
+void operator delete[](void* ptr)
+{
+    free(ptr);
+}
+
+void operator delete(void* ptr, unsigned long size)
+{
+    free(ptr);
 }

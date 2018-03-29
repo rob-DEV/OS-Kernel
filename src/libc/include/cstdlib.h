@@ -10,9 +10,10 @@
 #define OS_CSTDLIB_H
 
 #include <system.h>
-#include "include/string.h"
-#include "include/stdio.h"
-#include "include/time.h"
-#include "include/memory.h"
+
+#include <string.h>
+#include <stdio.h>
+#include <time.h>
+#include <memory.h>
 
 #endif //OS_CSTDLIB_H

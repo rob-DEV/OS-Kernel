@@ -1,5 +1,5 @@
 CXX = ~/opt/cross/bin/i386-elf-g++
-CXX_GLOBAL_INCLUDES = -I src/kernel/include -I src/arch/i386/include -I src/libc/
+CXX_GLOBAL_INCLUDES = -I src/kernel/include -I src/arch/i386/include -I src/libc/include
 CXX_FLAGS = -c -ffreestanding -nostdlib -fno-builtin -fno-rtti -fno-exceptions  $(CXX_GLOBAL_INCLUDES)
 ASM = ~/opt/cross/bin/i386-elf-as
 ASM_FLAGS = -c
@@ -15,6 +15,7 @@ C_SRC = $(C_FILE:.c=)
 CXX_FILE = $(wildcard src/arch/i386/*.cpp) \
            $(wildcard src/kernel/*.cpp) \
            $(wildcard src/kernel/drivers/*.cpp) \
+           $(wildcard src/kernel/gui/*.cpp) \
            $(wildcard src/kernel/hardwarecommunication/*.cpp)
 
 CXX_SRC = $(CXX_FILE:.c=)

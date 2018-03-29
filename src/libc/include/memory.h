@@ -7,8 +7,7 @@
 
 #include <arch.h>
 #include <system.h>
-
-#include "stdio.h"
+#include <stdio.h>
 
 typedef struct memory_chunk {
     memory_chunk *next;
@@ -30,5 +29,12 @@ void heap_install(size_t start, size_t size);
 
 void* malloc(size_t size);
 void free(void* ptr);
+
+void operator delete(void* ptr);
+void operator delete[](void* ptr);
+
+//needed for destructors
+//TODO: check implemenation
+void operator delete(void* ptr, unsigned long size);
 
 #endif //OS_MEMORY_H

@@ -3,6 +3,7 @@
 //
 #include "include/arch_keyboard.h"
 #include "include/arch_timer.h"
+#include "include/arch_string.h"
 
 /* Handles the keyboard interrupt */
 void keyboard_handler(registers_t *r) {
@@ -15,7 +16,11 @@ void keyboard_handler(registers_t *r) {
 
     } else {
 
-        putch(standard_keymap[scancode]);
+        char key_pressed = standard_keymap[scancode];
+        putch(key_pressed);
+
+
+
     }
 }
 

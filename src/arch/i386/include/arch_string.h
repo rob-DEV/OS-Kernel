@@ -8,6 +8,7 @@
 #include "arch_types.h"
 
 uint16_t strlen(const char* c);
+bool strcmp(const char* a, const char* b);
 void memcpy(void* src, void* dst , size_t size);
 void memset(void* dst, uint32_t size, uint8_t fill);
 void memsetw(void* dst, uint32_t size, uint16_t fill);
