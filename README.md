@@ -4,7 +4,7 @@ A simple OS Kernel written in C++ with an assembly bootloader.
 ![1](https://github.com/rob-DEV/os-kernel/blob/master/res/6.PNG)
 ![1](https://github.com/rob-DEV/os-kernel/blob/master/res/7.PNG)
 
-What does it does:
+What does it do:
 
     Global Descriptor Table
     Interrupt Descriptor Table
